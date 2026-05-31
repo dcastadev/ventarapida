@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::section})}">
+<body>
+<section th:fragment="content">
+    <h4 class="fw-bold mb-4">
+        <i class="bi bi-calendar-range me-2 text-primary"></i>Ventas por Rango de Fechas
+    </h4>
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <form th:action="@{/consultas/por-fecha}" method="get"
+                  class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Fecha inicio</label>
+                    <input type="date" name="fechaInicio" class="form-control"
+                           th:value="${fechaInicio}" required/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Fecha fin</label>
+                    <input type="date" name="fechaFin" class="form-control"
+                           th:value="${fechaFin}" required/>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-1"></i>Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${ventas != null}">
+        <p class="text-muted">
+            <span th:text="${ventas.size()}"></span> venta(s) encontrada(s)
+        </p>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Comprobante</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th class="text-end">Total</th>
+                            <th class="text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="v : ${ventas}">
+                            <td th:text="${v.serie + '-' + v.correlativo}" class="fw-semibold"></td>
+                            <td th:text="${v.cliente.apellidos + ', ' + v.cliente.nombres}"></td>
+                            <td th:text="${#temporals.format(v.fechaVenta,'dd/MM/yyyy HH:mm')}"></td>
+                            <td>
+                                <span class="badge"
+                                      th:classappend="${v.tipoCompro=='BOLETA'} ? 'bg-info' : 'bg-warning text-dark'"
+                                      th:text="${v.tipoCompro}"></span>
+                            </td>
+                            <td class="text-end fw-semibold" th:text="${'S/ ' + v.total}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/ventas/detalle/{id}(id=${v.idVenta})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(ventas)}">
+                            <td colspan="6" class="text-center text-muted py-4">
+                                No se encontraron ventas en ese rango
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

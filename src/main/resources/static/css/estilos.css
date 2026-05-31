@@ -1,0 +1,46 @@
+/* VentaRápida — estilos.css */
+
+body {
+    background-color: #f4f6fb;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+    font-weight: 600;
+}
+
+.table thead th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    border-bottom: 2px solid rgba(0,0,0,.1);
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.badge { font-size: 0.78rem; }
+
+/* Carrito de venta */
+#tablaCarrito tbody tr:hover { background-color: #f8f9fa; }
+
+/* Login card animation */
+.login-card {
+    animation: fadeInUp .4s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

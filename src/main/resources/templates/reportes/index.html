@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::section})}">
+<body>
+<section th:fragment="content">
+    <h4 class="fw-bold mb-4">
+        <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>Reportes JasperReports
+    </h4>
+
+    <div class="row g-4">
+
+        <!-- Reporte 1: Cierre de Caja -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-danger text-white">
+                    <h6 class="mb-0">
+                        <i class="bi bi-cash-coin me-1"></i>Reporte 1: Cierre de Caja
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">
+                        Genera un PDF con el resumen de ventas de un día específico:
+                        cantidad de operaciones, monto total y desglose por tipo de comprobante.
+                    </p>
+                    <form th:action="@{/reportes/cierre-caja}" method="get" target="_blank">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Fecha</label>
+                            <input type="date" name="fecha" class="form-control"
+                                   th:value="${hoy}" required/>
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-download me-1"></i>Generar PDF
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reporte 2: Productos Más Vendidos -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">
+                        <i class="bi bi-bar-chart me-1"></i>Reporte 2: Productos Más Vendidos
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">
+                        Genera un PDF con el ranking de los 10 productos más vendidos
+                        en un periodo, mostrando unidades vendidas e ingresos generados.
+                    </p>
+                    <form th:action="@{/reportes/productos-vendidos}" method="get" target="_blank">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Fecha inicio</label>
+                            <input type="date" name="fechaInicio" class="form-control" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Fecha fin</label>
+                            <input type="date" name="fechaFin" class="form-control"
+                                   th:value="${hoy}" required/>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">
+                            <i class="bi bi-download me-1"></i>Generar PDF
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

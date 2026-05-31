@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout(~{::section})}">
+<body>
+<section th:fragment="content">
+
+    <h4 class="mb-4 fw-bold">
+        <i class="bi bi-speedometer2 me-2 text-primary"></i>Dashboard
+    </h4>
+
+    <div class="row g-4">
+        <!-- Card Productos -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-3">
+                        <i class="bi bi-box-seam fs-2 text-primary"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0 small">Módulo</p>
+                        <h5 class="mb-0">Productos</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a th:href="@{/productos}" class="btn btn-sm btn-outline-primary w-100">
+                        Ver productos
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Clientes -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-success bg-opacity-10 p-3 rounded-3">
+                        <i class="bi bi-people fs-2 text-success"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0 small">Módulo</p>
+                        <h5 class="mb-0">Clientes</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a th:href="@{/clientes}" class="btn btn-sm btn-outline-success w-100">
+                        Ver clientes
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Nueva Venta -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-warning bg-opacity-10 p-3 rounded-3">
+                        <i class="bi bi-cart-plus fs-2 text-warning"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0 small">Módulo</p>
+                        <h5 class="mb-0">Nueva Venta</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a th:href="@{/ventas/nueva}" class="btn btn-sm btn-outline-warning w-100">
+                        Registrar venta
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Reportes (solo ADMIN) -->
+        <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-danger bg-opacity-10 p-3 rounded-3">
+                        <i class="bi bi-file-earmark-pdf fs-2 text-danger"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0 small">Módulo</p>
+                        <h5 class="mb-0">Reportes PDF</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a th:href="@{/reportes}" class="btn btn-sm btn-outline-danger w-100">
+                        Ver reportes
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Categorias (solo ADMIN) -->
+        <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-info bg-opacity-10 p-3 rounded-3">
+                        <i class="bi bi-tags fs-2 text-info"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-0 small">Módulo</p>
+                        <h5 class="mb-0">Categorías</h5>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a th:href="@{/categorias}" class="btn btn-sm btn-outline-info w-100">
+                        Administrar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
